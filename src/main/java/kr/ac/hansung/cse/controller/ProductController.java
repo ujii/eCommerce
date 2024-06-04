@@ -35,7 +35,7 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 
-	@GetMapping
+	@GetMapping // 모든 product를 조회한다.
 	public ResponseEntity<List<Product>> retrieveAllProducts() {
 		List<Product> products = productService.getAllProducts();
 		if (products.isEmpty()) {
@@ -44,7 +44,7 @@ public class ProductController {
 		return ResponseEntity.ok(products);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/{id}") // 특정 id를 가진 product를 조회한다.
 	public ResponseEntity<Product> retrieveProduct(@PathVariable Long id) {
 		Product product = productService.getProductById(id);
 		if (product == null) {
@@ -56,7 +56,7 @@ public class ProductController {
 	// DTO(Data Transfer Object) : 계층간 데이터 교환을 위한 객체, 여기서는 클라이언트(Postman)에서 오는 데이터를 수신할 목적으로 사용
     // Product와 ProductDto와의 차이를 비교해서 살펴보기 바람
 
-	@PostMapping
+	@PostMapping // 하나의 product를 생성한다.
 	public ResponseEntity<Product> createProduct(@Valid @RequestBody ProductDto request) {
 		Product product = productService.createProduct(request.getName(), request.getPrice());
 		return ResponseEntity.status(HttpStatus.CREATED).body(product);
@@ -64,13 +64,18 @@ public class ProductController {
 
 
 
-	@PutMapping("/{id}")
+	@PutMapping("/{id}") // 하나의 product를 수정한다.
 	public ResponseEntity<Product> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductDto request) {
+		// pathVariable의 id를 이용해 해당 product를 찾는다.
+		Product product = productService.getProductById(id);
+		// product를 수정한다.
+		productService.updateProduct(product);
 
+		return ResponseEntity.status(HttpStatus.OK).body(product);
 
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/{id}") // 특정 id를 가진 product를 삭제한다.
 	public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
 		Product product = productService.getProductById(id);
 		System.out.println(product);
