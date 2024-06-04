@@ -72,15 +72,15 @@ public class CategoryProductsController {
 
 	@DeleteMapping("/{productId}") // product를 category에서 제거한다.
 	public ResponseEntity<Void> removeProduct(@PathVariable Long categoryId, @PathVariable Long productId) {
-//		// product를 찾는다
-//		Product product = productService.getProductById(productId);
-//
-//		// category를 찾는다.
-//		Category category = categoryService.getCategoryById(categoryId);
-//
-//		// 제거한다.
-//		productService.removeCategory(product, category);
-//
-//		return ResponseEntity.noContent().build();
+		// product를 찾는다
+		Product product = productService.getProductById(productId);
+
+		// category를 찾는다.
+		Category category = categoryService.getCategoryById(categoryId);
+
+		// 제거한다.
+		productService.removeCategory(product, category);
+
+		return ResponseEntity.noContent().build();
 	}
 }
