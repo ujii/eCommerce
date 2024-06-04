@@ -30,16 +30,16 @@ public class CategoryController {
 
     @GetMapping("/{id}") // 특정 id를 가진 category를 조회한다.
     public ResponseEntity<Category> retrieveCategory(@PathVariable Long id) {
-//
-//        // pathVariable의 id를 가진 category를 찾는다.
-//        Category category = categoryService.getCategoryById(id);
-//
-//        // category가 없다면 오류 반환
-//        if (category == null) {
-//            return ResponseEntity.noContent().build();
-//        }
-//
-//        return ResponseEntity.ok(category);
+
+        // pathVariable의 id를 가진 category를 찾는다.
+        Category category = categoryService.getCategoryById(id);
+
+        // category가 없다면 오류 반환
+        if (category == null) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(category);
     }
 
     @PostMapping
