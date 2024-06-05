@@ -69,6 +69,8 @@ public class ProductController {
 		// pathVariable의 id를 이용해 해당 product를 찾는다.
 		Product product = productService.getProductById(id);
 		// product를 수정한다.
+		product.setName(request.getName());
+		product.setPrice(request.getPrice());
 		productService.updateProduct(product);
 
 		return ResponseEntity.status(HttpStatus.OK).body(product);
