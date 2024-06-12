@@ -1,2 +1,2 @@
 # eCommerce
-web
+This is a spring project using REST API.
